@@ -107,4 +107,19 @@ public class KitchenSinkTester {
 		assertThat(result).isEqualTo("WHO");
 
 	}
+	public void daf() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.databaseEngine.search("daf");
+			
+		
+		} catch (Exception e) {
+			thrown = true;
+			
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("hahaha");
+
+	}
 }
