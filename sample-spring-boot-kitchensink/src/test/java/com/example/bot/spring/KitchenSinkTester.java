@@ -46,28 +46,30 @@ import com.example.bot.spring.DatabaseEngine;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
+@SpringBootTest(classes = { KitchenSinkTester.class, SQLDatabaseEngine.class })
 public class KitchenSinkTester {
 	@Autowired
-	private DatabaseEngine databaseEngine;
+	private SQLDatabaseEngine databaseEngine;
 	
 	@Test
-	public void testNotFound() throws Exception {
+	public void palette() throws Exception {
 		boolean thrown = false;
+		String result=null;
 		try {
-			this.databaseEngine.search("no");
+			result=this.databaseEngine.search("palette");
 		} catch (Exception e) {
 			thrown = true;
 		}
-		assertThat(thrown).isEqualTo(true);
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("good song");
 	}
 	
 	@Test
-	public void testFound() throws Exception {
+	public void goodDay() throws Exception {
 		boolean thrown = false;
 		String result = null;
 		try {
-			result = this.databaseEngine.search("abc");
+			result = this.databaseEngine.search("good day");
 			
 		
 		} catch (Exception e) {
@@ -75,14 +77,14 @@ public class KitchenSinkTester {
 			
 		}
 		assertThat(!thrown).isEqualTo(true);
-		assertThat(result).isEqualTo("def");
+		assertThat(result).isEqualTo("nice day");
 	}
 	@Test
-	public void fine1() throws Exception {
+	public void youAndI() throws Exception {
 		boolean thrown = false;
 		String result = null;
 		try {
-			result = this.databaseEngine.search("I am fine");
+			result = this.databaseEngine.search("you and i");
 			
 		
 		} catch (Exception e) {
@@ -90,13 +92,14 @@ public class KitchenSinkTester {
 			
 		}
 		assertThat(!thrown).isEqualTo(true);
-		assertThat(result).isEqualTo("Great!");
+		assertThat(result).isEqualTo("me and you");
 	}
-	public void fine2() throws Exception {
+	@Test
+	public void sleeplessNight() throws Exception {
 		boolean thrown = false;
 		String result = null;
 		try {
-			result = this.databaseEngine.search("Who says I am fine?");
+			result = this.databaseEngine.search("sleepless night");
 			
 		
 		} catch (Exception e) {
@@ -104,14 +107,15 @@ public class KitchenSinkTester {
 			
 		}
 		assertThat(!thrown).isEqualTo(true);
-		assertThat(result).isEqualTo("WHO");
+		assertThat(result).isEqualTo("go eat medicine");
 
 	}
-	public void daf() throws Exception {
+	@Test
+	public void twentyThree() throws Exception {
 		boolean thrown = false;
 		String result = null;
 		try {
-			result = this.databaseEngine.search("daf");
+			result = this.databaseEngine.search("twenty-three");
 			
 		
 		} catch (Exception e) {
@@ -119,7 +123,7 @@ public class KitchenSinkTester {
 			
 		}
 		assertThat(!thrown).isEqualTo(true);
-		assertThat(result).isEqualTo("hahaha");
+		assertThat(result).isEqualTo("question");
 
 	}
 }
