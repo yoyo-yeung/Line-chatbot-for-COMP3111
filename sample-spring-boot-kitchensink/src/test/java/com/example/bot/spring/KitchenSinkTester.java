@@ -92,7 +92,7 @@ public class KitchenSinkTester {
 			
 		}
 		assertThat(!thrown).isEqualTo(true);
-		assertThat(result).isEqualTo("me and you");
+		assertThat(result).isEqualTo("nice");
 	}
 	@Test
 	public void sleeplessNight() throws Exception {
