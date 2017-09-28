@@ -13,29 +13,30 @@ import java.net.URI;
 @Slf4j
 public class SQLDatabaseEngine extends DatabaseEngine {
 	@Override
-	String search(String text) throws Exception {
+	String search(String txt) throws Exception {
 		//Write your code here
-		String result;
+	
 		Connection connection=getConnection();
 		
-		PreparedStatement stmt=connection.prepareStatement("SELECT response FROM chatbotDB "
-				+ "WHERE LOWER(request) LIKE LOWER( CONCAT('%',?,'%') )");
+		PreparedStatement stt=
+				connection.prepareStatement("SELECT response FROM chatbotDB WHERE LOWER(request) LIKE LOWER( CONCAT('%',?,'%') )");
 		
-		stmt.setString(1,text);
+		stt.setString(1,txt);
 		
-		ResultSet rs = stmt.executeQuery();
-		if(!rs.next()) {	// not found
-			rs.close();
-			stmt.close();
+		ResultSet res = stt.executeQuery();
+		String result=null;
+		if(!res.next()) {	// not found
 			connection.close();
-			throw new Exception("NOT FOUND");
-		}else {				//found
-			result=rs.getString(1);
-		}
-		rs.close();
-		stmt.close();
+			stt.close();
+			res.close();
+			throw new Exception("NOT FOUND"); //end1
+		}			
+		result=res.getString(1);//found
+		
 		connection.close();
-		return result;
+		stt.close();
+		res.close();
+		return result;	//official end
 	}
 	
 	
